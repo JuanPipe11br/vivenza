@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-surface text-brand-on-surface font-functional leading-readable;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility */
+  .glass-panel {
+    @apply bg-brand-surface-container-lowest/80 backdrop-blur-[20px];
+  }
+}
