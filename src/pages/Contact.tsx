@@ -78,7 +78,7 @@ export const Contact: React.FC = () => {
                 <div>
                    <Typography variant="label" className="text-brand-primary block mb-6">General Inquiries</Typography>
                    <Typography variant="body" className="text-brand-on-surface-variant block">hello@studiovivenza.com</Typography>
-                   <Typography variant="body" className="text-brand-on-surface-variant block">+1 (212) 555-0199</Typography>
+                   <Typography variant="body" className="text-brand-on-surface-variant block">+57 318 219 9984</Typography>
                 </div>
 
                 <div>
