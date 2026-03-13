@@ -2,7 +2,7 @@ import React from 'react';
 
 type TypographyProps = {
   variant: 'display' | 'headline' | 'body' | 'label';
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   children: React.ReactNode;
   className?: string;
 };
@@ -24,7 +24,7 @@ export const Typography: React.FC<TypographyProps> = ({ variant, as, children, c
   );
 };
 
-function defaultElement(variant: string): keyof JSX.IntrinsicElements {
+function defaultElement(variant: string): React.ElementType {
   switch (variant) {
     case 'display': return 'h1';
     case 'headline': return 'h2';

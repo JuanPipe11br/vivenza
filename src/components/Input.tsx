@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
 };
 
 export const Input: React.FC<InputProps> = ({ label, className = '', id, ...props }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const inputId = id || label.replace(/\s+/g, '-').toLowerCase();
 
   return (
@@ -14,8 +13,6 @@ export const Input: React.FC<InputProps> = ({ label, className = '', id, ...prop
         id={inputId}
         className="block w-full bg-transparent border-0 border-b border-brand-outline-variant py-2.5 text-brand-on-surface focus:outline-none focus:ring-0 focus:border-brand-primary transition-colors duration-300 peer"
         placeholder=" "
-        onFocus={() => setIsFocused(true)}
-        onBlur={(e) => setIsFocused(e.target.value !== '')}
         {...props}
       />
       <label
