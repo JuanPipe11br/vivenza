@@ -29,7 +29,7 @@ export const QuoteRequest: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://formsubmit.co/ajax/hello@studiovivenza.com', {
+      const response = await fetch('https://formsubmit.co/ajax/projs11br@proton.me', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
