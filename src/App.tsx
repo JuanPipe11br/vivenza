@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { ProductCatalog } from './pages/ProductCatalog';
@@ -9,7 +9,7 @@ import { Contact } from './pages/Contact';
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter basename="/vivenza">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
