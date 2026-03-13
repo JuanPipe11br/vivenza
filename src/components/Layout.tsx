@@ -100,7 +100,7 @@ export const Layout: React.FC = () => {
             <Typography variant="label" className="text-brand-on-surface-variant block mt-8">© 2026 Studio Vivenza</Typography>
             <div className="mt-6 flex flex-col gap-2">
                <a href="mailto:hola@vivenza.com" className="font-functional text-sm text-brand-on-surface-variant hover:text-brand-primary transition-colors">hola@vivenza.com</a>
-               <a href="tel:+1234567890" className="font-functional text-sm text-brand-on-surface-variant hover:text-brand-primary transition-colors">+1 (234) 567-890</a>
+               <a href="tel:+573182199984" className="font-functional text-sm text-brand-on-surface-variant hover:text-brand-primary transition-colors">+57 318 219 9984</a>
                <Typography variant="label" className="text-brand-on-surface-variant mt-2">123 Diseño Street, Ciudad</Typography>
             </div>
          </div>
@@ -143,7 +143,7 @@ export const Layout: React.FC = () => {
           </button>
         )}
         <a
-          href="https://wa.me/1234567890"
+          href="https://wa.me/573182199984"
           target="_blank"
           rel="noopener noreferrer"
           className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
