@@ -47,12 +47,27 @@ export const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setIsSubmitted(false), 5000);
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/hello@studiovivenza.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message
+          })
+        });
+        if (response.ok) {
+          setIsSubmitted(true);
+          setFormData({ name: '', email: '', message: '' });
+          setTimeout(() => setIsSubmitted(false), 5000);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 

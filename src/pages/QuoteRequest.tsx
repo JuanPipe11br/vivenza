@@ -1,10 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography } from '../components/Typography';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  propertyType: string;
+  windows: string;
+  requirements: string;
+}
+
 export const QuoteRequest: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '', lastName: '', email: '', phone: '',
+    propertyType: '', windows: '', requirements: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/hello@studiovivenza.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          'First Name': formData.firstName,
+          'Last Name': formData.lastName,
+          'Email': formData.email,
+          'Phone': formData.phone,
+          'Property Type': formData.propertyType,
+          'Number of Windows': formData.windows,
+          'Detailed Requirements': formData.requirements,
+          'Form Type': 'Quote Request'
+        })
+      });
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', propertyType: '', windows: '', requirements: '' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="bg-brand-surface min-h-[calc(100vh-88px)] flex flex-col justify-center py-24 px-8 md:px-16 relative overflow-hidden">
        
@@ -20,25 +68,33 @@ export const QuoteRequest: React.FC = () => {
              </Typography>
           </div>
 
-          <Card className="lg:col-span-7 p-8 md:p-16 shadow-ambient w-full" elevated>
-              <form className="flex flex-col gap-10" onSubmit={(e) => e.preventDefault()}>
+           <Card className="lg:col-span-7 p-8 md:p-16 shadow-ambient w-full" elevated>
+              {isSubmitted && (
+                <div className="mb-8 p-4 bg-brand-primary/10 border border-brand-primary/30 rounded">
+                  <Typography variant="body" className="text-brand-primary">Thank you! Your quote request has been sent. We'll be in touch soon.</Typography>
+                </div>
+              )}
+              <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                   <Input label="First Name" type="text" required />
-                   <Input label="Last Name" type="text" required />
+                   <Input label="First Name" type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+                   <Input label="Last Name" type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
                  </div>
-                 <Input label="Email Address" type="email" required />
-                 <Input label="Phone Number" type="tel" />
+                 <Input label="Email Address" type="email" name="email" value={formData.email} onChange={handleChange} required />
+                 <Input label="Phone Number" type="tel" name="phone" value={formData.phone} onChange={handleChange} />
                  
                  <div className="pt-4 border-t border-brand-outline-variant/30 mt-4">
                     <Typography variant="label" className="text-brand-on-surface-variant mb-6 block">Project Scope</Typography>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                       <Input label="Property Type (e.g., Residential)" type="text" />
-                       <Input label="Number of Windows" type="number" />
+                       <Input label="Property Type (e.g., Residential)" type="text" name="propertyType" value={formData.propertyType} onChange={handleChange} />
+                       <Input label="Number of Windows" type="number" name="windows" value={formData.windows} onChange={handleChange} />
                     </div>
                  </div>
 
                  <div className="relative pt-5 mt-4">
                     <textarea 
+                       name="requirements"
+                       value={formData.requirements}
+                       onChange={handleChange}
                        className="block w-full bg-transparent border-0 border-b border-brand-outline-variant py-2.5 text-brand-on-surface focus:outline-none focus:ring-0 focus:border-brand-primary transition-colors duration-300 peer resize-none"
                        rows={4}
                        placeholder=" "
@@ -56,7 +112,7 @@ export const QuoteRequest: React.FC = () => {
                     <Button variant="primary" type="submit" className="w-full md:w-auto">Submit Request</Button>
                  </div>
               </form>
-          </Card>
+           </Card>
        </div>
     </div>
   );
